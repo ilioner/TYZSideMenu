@@ -280,12 +280,16 @@ typedef enum : NSUInteger {
             }else{
                 if (tempPointX - _startPointX > 0.01f) {
                     //从左边划起
-                    _currentState = TYZSideMenu_LeftState;
+                    if (_currentModel != TYZSideMenu_LeftModel) {
+                        _currentState = TYZSideMenu_LeftState;
+                    }
                 }
                 
                 if (tempPointX - _startPointX < 0.01f) {
                     //从右划起
-                    _currentState = TYZSideMenu_RightState;
+                    if (_currentModel != TYZSideMenu_RightModel) {
+                        _currentState = TYZSideMenu_RightState;
+                    }
                 }
             }
             
@@ -323,16 +327,20 @@ typedef enum : NSUInteger {
             }
         }
     }else if (_currentModel == TYZSideMenu_LeftModel){
-        if(tempX <= -50.0f){
-            [self leftAnimate:NO];
-        }else{
-            [self leftAnimate:YES];
+        if (_currentState != TYZSideMenu_NoneState) {
+            if(tempX <= -50.0f){
+                [self leftAnimate:NO];
+            }else{
+                [self leftAnimate:YES];
+            }
         }
     }else if (_currentModel == TYZSideMenu_RightModel){
-        if(tempX >= 50.0f){
-            [self rightAnimate:NO];
-        }else{
-            [self rightAnimate:YES];
+        if (_currentState != TYZSideMenu_NoneState) {
+            if(tempX >= 50.0f){
+                [self rightAnimate:NO];
+            }else{
+                [self rightAnimate:YES];
+            }
         }
     }
     

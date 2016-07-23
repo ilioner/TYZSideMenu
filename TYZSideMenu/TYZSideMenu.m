@@ -86,7 +86,8 @@ typedef enum : NSUInteger {
         _coverView.backgroundColor = [UIColor clearColor];
         _visualEfView = [[UIVisualEffectView alloc] initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleLight]];
         _visualEfView.frame = _coverView.frame;
-        _visualEfView.alpha = 0.0f;
+        _visualEfView.alpha = 1.0f;
+        _coverView.alpha = 0.0f;
         [_coverView addSubview:_visualEfView];
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hiddenAll)];
         [_coverView addGestureRecognizer:tap];
@@ -137,10 +138,10 @@ typedef enum : NSUInteger {
     [UIView animateWithDuration:0.5f animations:^{
         CGPoint center;
         if(closeOrOpen){
-            _visualEfView.alpha = 1.0f;
+            _coverView.alpha = 1.0f;
             center = CGPointMake(DefaultLeftVisibleOffset - ScreenWidth/2, ScreenHeight/2);
         }else{
-            _visualEfView.alpha = 0.0f;
+            _coverView.alpha = 0.0f;
             center = CGPointMake(-ScreenWidth/2, ScreenHeight/2);
         }
         
@@ -163,10 +164,10 @@ typedef enum : NSUInteger {
     [UIView animateWithDuration:0.5f animations:^{
         CGPoint center;
         if(closeOrOpen){
-            _visualEfView.alpha = 1.0f;
+            _coverView.alpha = 1.0f;
             center = CGPointMake((ScreenWidth+ScreenWidth/2)-DefaultLeftVisibleOffset, ScreenHeight/2);
         }else{
-            _visualEfView.alpha = 0.0f;
+            _coverView.alpha = 0.0f;
             center = CGPointMake((ScreenWidth+ScreenWidth/2), ScreenHeight/2);
         }
         
@@ -188,7 +189,7 @@ typedef enum : NSUInteger {
     self.isLeftShow = NO;
     
     [UIView animateWithDuration:0.5f animations:^{
-        _visualEfView.alpha = 0.0f;
+        _coverView.alpha = 0.0f;
         CGPoint rightCenter = CGPointMake((ScreenWidth+ScreenWidth/2), ScreenHeight/2);
         self.rightSideViewController.view.center = rightCenter;
         
@@ -206,7 +207,7 @@ typedef enum : NSUInteger {
         [self.view addSubview:self.leftSideViewController.view];
     }
     self.isLeftShow = YES;
-    _visualEfView.alpha = alphaValue;
+    _coverView.alpha = alphaValue;
     CGPoint leftCenter = CGPointMake(pointX, ScreenHeight/2);
     self.leftSideViewController.view.center = leftCenter;
 }
@@ -218,9 +219,29 @@ typedef enum : NSUInteger {
         [self.view addSubview:self.rightSideViewController.view];
     }
     self.isRightShow = YES;
-    _visualEfView.alpha = alphaValue;
+    _coverView.alpha = alphaValue;
     CGPoint rightCenter = CGPointMake(pointX, ScreenHeight/2);
     self.rightSideViewController.view.center = rightCenter;
+}
+
+
+- (BOOL)judgePanWithModel:(TYZSideModel)model
+{
+    BOOL judgeResult = NO;
+    if(model == TYZSideMenu_LeftModel){
+        if (self.leftSideViewController.view.center.x > self.leftVisibleOffset-ScreenWidth/2) {
+            judgeResult = NO;
+        }else{
+            judgeResult = YES;
+        }
+    }else if(model == TYZSideMenu_RightModel){
+        if (self.rightSideViewController.view.center.x < (ScreenWidth+ScreenWidth/2) - self.rightVisibleOffset) {
+            judgeResult = NO;
+        }else{
+            judgeResult = YES;
+        }
+    }
+    return judgeResult;
 }
 
 
@@ -247,20 +268,28 @@ typedef enum : NSUInteger {
                         [self rightSideChangeWithXOffset:((ScreenWidth+ScreenWidth/2) + tempX) withAlphaValue:tempAlpha];
                     }
                 }else if (_currentModel == TYZSideMenu_LeftModel){
-                    [self leftSideChangeWithXOffset:(DefaultLeftVisibleOffset - ScreenWidth/2 + tempX) withAlphaValue:1.0f - tempAlpha];
+                    if([self judgePanWithModel:_currentModel]){
+                        [self leftSideChangeWithXOffset:(DefaultLeftVisibleOffset - ScreenWidth/2 + tempX) withAlphaValue:1.0f - tempAlpha];
+                    }
                 }else if (_currentModel == TYZSideMenu_RightModel){
-                    [self rightSideChangeWithXOffset:((ScreenWidth+ScreenWidth/2)-DefaultLeftVisibleOffset + tempX) withAlphaValue:1.0f - tempAlpha];
+                    if([self judgePanWithModel:_currentModel]){
+                        [self rightSideChangeWithXOffset:((ScreenWidth+ScreenWidth/2)-DefaultLeftVisibleOffset + tempX) withAlphaValue:1.0f - tempAlpha];
+                    }
                 }
                 
             }else{
                 if (tempPointX - _startPointX > 0.01f) {
                     //从左边划起
-                    _currentState = TYZSideMenu_LeftState;
+                    if (_currentModel != TYZSideMenu_LeftModel) {
+                        _currentState = TYZSideMenu_LeftState;
+                    }
                 }
                 
                 if (tempPointX - _startPointX < 0.01f) {
                     //从右划起
-                    _currentState = TYZSideMenu_RightState;
+                    if (_currentModel != TYZSideMenu_RightModel) {
+                        _currentState = TYZSideMenu_RightState;
+                    }
                 }
             }
             
@@ -298,16 +327,20 @@ typedef enum : NSUInteger {
             }
         }
     }else if (_currentModel == TYZSideMenu_LeftModel){
-        if(tempX <= -50.0f){
-            [self leftAnimate:NO];
-        }else{
-            [self leftAnimate:YES];
+        if (_currentState != TYZSideMenu_NoneState) {
+            if(tempX <= -50.0f){
+                [self leftAnimate:NO];
+            }else{
+                [self leftAnimate:YES];
+            }
         }
     }else if (_currentModel == TYZSideMenu_RightModel){
-        if(tempX >= 50.0f){
-            [self rightAnimate:NO];
-        }else{
-            [self rightAnimate:YES];
+        if (_currentState != TYZSideMenu_NoneState) {
+            if(tempX >= 50.0f){
+                [self rightAnimate:NO];
+            }else{
+                [self rightAnimate:YES];
+            }
         }
     }
     
