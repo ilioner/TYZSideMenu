@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		9C1522111D432FF6006F358D /* TYZSideMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C15220D1D432FF6006F358D /* TYZSideMenu.m */; };
 		9C1522121D432FF6006F358D /* UIViewController+TYZSideMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C1522101D432FF6006F358D /* UIViewController+TYZSideMenu.m */; };
+		9C1522141D433309006F358D /* top_navigation_infoicon_highlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C1522131D433309006F358D /* top_navigation_infoicon_highlighted@2x.png */; };
+		9C1522161D433311006F358D /* top_navigation_menuicon_highlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C1522151D433311006F358D /* top_navigation_menuicon_highlighted@2x.png */; };
+		9C1522181D433409006F358D /* top_navigation_close_highlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C1522171D433409006F358D /* top_navigation_close_highlighted@2x.png */; };
 		9CD46B781D42207400DC8D57 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CD46B771D42207400DC8D57 /* main.m */; };
 		9CD46B7B1D42207400DC8D57 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CD46B7A1D42207400DC8D57 /* AppDelegate.m */; };
 		9CD46B7E1D42207400DC8D57 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CD46B7D1D42207400DC8D57 /* ViewController.m */; };
@@ -30,6 +33,9 @@
 		9C15220E1D432FF6006F358D /* TYZSideMenuHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYZSideMenuHeader.h; sourceTree = "<group>"; };
 		9C15220F1D432FF6006F358D /* UIViewController+TYZSideMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+TYZSideMenu.h"; sourceTree = "<group>"; };
 		9C1522101D432FF6006F358D /* UIViewController+TYZSideMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+TYZSideMenu.m"; sourceTree = "<group>"; };
+		9C1522131D433309006F358D /* top_navigation_infoicon_highlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "top_navigation_infoicon_highlighted@2x.png"; sourceTree = "<group>"; };
+		9C1522151D433311006F358D /* top_navigation_menuicon_highlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "top_navigation_menuicon_highlighted@2x.png"; sourceTree = "<group>"; };
+		9C1522171D433409006F358D /* top_navigation_close_highlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "top_navigation_close_highlighted@2x.png"; sourceTree = "<group>"; };
 		9CD46B731D42207400DC8D57 /* SideMenu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SideMenu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9CD46B771D42207400DC8D57 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		9CD46B791D42207400DC8D57 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -101,6 +107,9 @@
 				9CD46B7D1D42207400DC8D57 /* ViewController.m */,
 				9CD46B7F1D42207400DC8D57 /* Main.storyboard */,
 				9CD8EBA71D42606800437564 /* 1.jpg */,
+				9C1522171D433409006F358D /* top_navigation_close_highlighted@2x.png */,
+				9C1522131D433309006F358D /* top_navigation_infoicon_highlighted@2x.png */,
+				9C1522151D433311006F358D /* top_navigation_menuicon_highlighted@2x.png */,
 				9CD46B821D42207400DC8D57 /* Assets.xcassets */,
 				9CD46B841D42207400DC8D57 /* LaunchScreen.storyboard */,
 				9CD46B871D42207400DC8D57 /* Info.plist */,
@@ -183,11 +192,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9C1522161D433311006F358D /* top_navigation_menuicon_highlighted@2x.png in Resources */,
 				9CD46B861D42207400DC8D57 /* LaunchScreen.storyboard in Resources */,
 				9CD8EB9C1D42507B00437564 /* CenterViewController.xib in Resources */,
 				9CD8EBA11D42509A00437564 /* LeftViewController.xib in Resources */,
 				9CD8EBA61D4250AC00437564 /* RightViewController.xib in Resources */,
 				9CD46B831D42207400DC8D57 /* Assets.xcassets in Resources */,
+				9C1522141D433309006F358D /* top_navigation_infoicon_highlighted@2x.png in Resources */,
+				9C1522181D433409006F358D /* top_navigation_close_highlighted@2x.png in Resources */,
 				9CD46B811D42207400DC8D57 /* Main.storyboard in Resources */,
 				9CD8EBA81D42606800437564 /* 1.jpg in Resources */,
 			);
