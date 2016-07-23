@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "TYZSideMenu.h"
+#import "TYZSideMenuHeader.h"
 #import "CenterViewController.h"
 #import "LeftViewController.h"
 #import "RightViewController.h"

@@ -7,7 +7,6 @@
 //
 
 #import "LeftViewController.h"
-#import "TYZSideMenu.h"
 @interface LeftViewController ()
 
 @end

@@ -1,9 +1,9 @@
 //
-//  UIViewController+XTSideMenu.h
-//  NewXTNews
+//  UIViewController+TYZSideMenu.h
+//  SideMenu
 //
-//  Created by XT on 14-8-9.
-//  Copyright (c) 2014年 XT. All rights reserved.
+//  Created by Tywin on 16/7/22.
+//  Copyright © 2016年 zql. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

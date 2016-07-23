@@ -7,7 +7,6 @@
 //
 
 #import "RightViewController.h"
-#import "TYZSideMenu.h"
 @interface RightViewController ()
 
 @end
