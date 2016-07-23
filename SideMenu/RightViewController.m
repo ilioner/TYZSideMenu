@@ -24,9 +24,8 @@
     // Dispose of any resources that can be recreated.
 }
 - (IBAction)close:(id)sender {
-    if([self.parentViewController isKindOfClass:[TYZSideMenu class]]){
-        TYZSideMenu *pvc = (TYZSideMenu *)self.parentViewController;
-        [pvc hiddenAll];
+    if (self.sideMenuViewController) {
+        [self.sideMenuViewController hiddenAll];
     }
 }
 

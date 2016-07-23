@@ -25,16 +25,14 @@
 }
 
 - (IBAction)showLeft:(UIButton *)sender {
-    if([self.parentViewController isKindOfClass:[TYZSideMenu class]]){
-        TYZSideMenu *pvc = (TYZSideMenu *)self.parentViewController;
-        [pvc showLeftSideMenu];
+    if (self.sideMenuViewController) {
+        [self.sideMenuViewController showLeftSideMenu];
     }
 }
 
 - (IBAction)showRight:(UIButton *)sender {
-    if([self.parentViewController isKindOfClass:[TYZSideMenu class]]){
-        TYZSideMenu *pvc = (TYZSideMenu *)self.parentViewController;
-        [pvc showRightSideMenu];
+    if (self.sideMenuViewController) {
+        [self.sideMenuViewController showRightSideMenu];
     }
 }
 

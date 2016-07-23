@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9C1522011D431315006F358D /* UIViewController+TYZSideMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C1522001D431315006F358D /* UIViewController+TYZSideMenu.m */; };
 		9CD46B781D42207400DC8D57 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CD46B771D42207400DC8D57 /* main.m */; };
 		9CD46B7B1D42207400DC8D57 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CD46B7A1D42207400DC8D57 /* AppDelegate.m */; };
 		9CD46B7E1D42207400DC8D57 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CD46B7D1D42207400DC8D57 /* ViewController.m */; };
@@ -24,6 +25,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9C1521FF1D431315006F358D /* UIViewController+TYZSideMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+TYZSideMenu.h"; sourceTree = "<group>"; };
+		9C1522001D431315006F358D /* UIViewController+TYZSideMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+TYZSideMenu.m"; sourceTree = "<group>"; };
 		9CD46B731D42207400DC8D57 /* SideMenu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SideMenu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9CD46B771D42207400DC8D57 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		9CD46B791D42207400DC8D57 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -90,6 +93,8 @@
 				9CD46B761D42207400DC8D57 /* Supporting Files */,
 				9CD46B8D1D42216100DC8D57 /* TYZSideMenu.h */,
 				9CD46B8E1D42216100DC8D57 /* TYZSideMenu.m */,
+				9C1521FF1D431315006F358D /* UIViewController+TYZSideMenu.h */,
+				9C1522001D431315006F358D /* UIViewController+TYZSideMenu.m */,
 				9CD8EB981D42507B00437564 /* CenterViewController.h */,
 				9CD8EB991D42507B00437564 /* CenterViewController.m */,
 				9CD8EB9A1D42507B00437564 /* CenterViewController.xib */,
@@ -191,6 +196,7 @@
 				9CD46B7B1D42207400DC8D57 /* AppDelegate.m in Sources */,
 				9CD8EBA01D42509A00437564 /* LeftViewController.m in Sources */,
 				9CD46B781D42207400DC8D57 /* main.m in Sources */,
+				9C1522011D431315006F358D /* UIViewController+TYZSideMenu.m in Sources */,
 				9CD8EB9B1D42507B00437564 /* CenterViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-@class TYZViewController;
+#import "UIViewController+TYZSideMenu.h"
 @interface RightViewController : UIViewController
 
 @end
