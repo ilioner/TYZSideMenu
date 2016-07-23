@@ -7,23 +7,23 @@
 
 ### 如何安装
 
-1. 使用cocoapods
+* 使用cocoapods
 
 `
 pod "TYZSideMenu"
 `
 
-2. 将TYZSideMenu拖入工程
+* 将TYZSideMenu拖入工程
 
 ### 如何使用
 
-添加头文件
+* 添加头文件
 
 `
 	#import "TYZSideMenuHeader.h"
 `
 
-实例化
+* 实例化
 
 `
 TYZSideMenu *view = [[TYZSideMenu alloc] initWithContentViewController:[[CenterViewController alloc]init] leftSideViewController:[[LeftViewController alloc]init] rightSideViewController:[[RightViewController alloc]init]];
