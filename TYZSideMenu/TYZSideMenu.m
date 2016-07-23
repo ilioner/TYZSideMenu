@@ -58,8 +58,14 @@ typedef enum : NSUInteger {
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self addChildViewController:self.centerViewController];
-    [self addChildViewController:self.leftSideViewController];
-    [self addChildViewController:self.rightSideViewController];
+    if (self.leftSideViewController) {
+        [self addChildViewController:self.leftSideViewController];
+    }
+    
+    if (self.rightSideViewController) {
+        [self addChildViewController:self.rightSideViewController];
+    }
+    
     [self configFrame];
     [self configSubView];
     
@@ -129,6 +135,9 @@ typedef enum : NSUInteger {
 }
 
 - (void)leftAnimate:(BOOL)closeOrOpen{
+    if (!self.leftSideViewController) {
+        return;
+    }
     if(![self.view viewWithTag:LEFT_TAG]){
         [self.view addSubview:self.leftSideViewController.view];
     }
@@ -156,6 +165,9 @@ typedef enum : NSUInteger {
 }
 
 - (void)rightAnimate:(BOOL)closeOrOpen{
+    if (!self.rightSideViewController) {
+        return;
+    }
     if(![self.view viewWithTag:RIGHT_TAG]){
         [self.view addSubview:self.rightSideViewController.view];
     }
@@ -203,6 +215,9 @@ typedef enum : NSUInteger {
 - (void)leftSideChangeWithXOffset:(CGFloat)pointX withAlphaValue:(CGFloat)alphaValue
 {
     [self addCoverView];
+    if (!self.leftSideViewController) {
+        return;
+    }
     if(![self.view viewWithTag:LEFT_TAG]){
         [self.view addSubview:self.leftSideViewController.view];
     }
@@ -215,6 +230,9 @@ typedef enum : NSUInteger {
 - (void)rightSideChangeWithXOffset:(CGFloat)pointX withAlphaValue:(CGFloat)alphaValue
 {
     [self addCoverView];
+    if (!self.rightSideViewController) {
+        return;
+    }
     if(![self.view viewWithTag:RIGHT_TAG]){
         [self.view addSubview:self.rightSideViewController.view];
     }
