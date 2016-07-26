@@ -144,7 +144,7 @@ typedef enum : NSUInteger {
     
     self.isLeftShow = closeOrOpen;
     _currentModel = closeOrOpen?TYZSideMenu_LeftModel:TYZSideMenu_NoneModel;
-    [UIView animateWithDuration:0.5f animations:^{
+    [UIView animateWithDuration:0.25f delay:0.0f options:UIViewAnimationOptionCurveEaseOut animations:^{
         CGPoint center;
         if(closeOrOpen){
             _coverView.alpha = 1.0f;
@@ -173,7 +173,7 @@ typedef enum : NSUInteger {
     }
     self.isRightShow = closeOrOpen;
     _currentModel = closeOrOpen?TYZSideMenu_RightModel:TYZSideMenu_NoneModel;
-    [UIView animateWithDuration:0.5f animations:^{
+    [UIView animateWithDuration:0.25f delay:0.0f options:UIViewAnimationOptionCurveEaseOut animations:^{
         CGPoint center;
         if(closeOrOpen){
             _coverView.alpha = 1.0f;
@@ -200,7 +200,7 @@ typedef enum : NSUInteger {
     self.isRightShow = NO;
     self.isLeftShow = NO;
     
-    [UIView animateWithDuration:0.5f animations:^{
+    [UIView animateWithDuration:0.25f delay:0.0f options:UIViewAnimationOptionCurveEaseOut animations:^{
         _coverView.alpha = 0.0f;
         CGPoint rightCenter = CGPointMake((ScreenWidth+ScreenWidth/2), ScreenHeight/2);
         self.rightSideViewController.view.center = rightCenter;
