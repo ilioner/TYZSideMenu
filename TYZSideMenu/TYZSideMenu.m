@@ -144,7 +144,7 @@ typedef enum : NSUInteger {
     
     self.isLeftShow = closeOrOpen;
     _currentModel = closeOrOpen?TYZSideMenu_LeftModel:TYZSideMenu_NoneModel;
-    [UIView animateWithDuration:0.25f delay:0.0f options:UIViewAnimationOptionCurveEaseOut animations:^{
+    [UIView animateWithDuration:0.25f delay:0.0f options:UIViewAnimationOptionCurveEaseIn animations:^{
         CGPoint center;
         if(closeOrOpen){
             _coverView.alpha = 1.0f;
@@ -173,7 +173,7 @@ typedef enum : NSUInteger {
     }
     self.isRightShow = closeOrOpen;
     _currentModel = closeOrOpen?TYZSideMenu_RightModel:TYZSideMenu_NoneModel;
-    [UIView animateWithDuration:0.25f delay:0.0f options:UIViewAnimationOptionCurveEaseOut animations:^{
+    [UIView animateWithDuration:0.25f delay:0.0f options:UIViewAnimationOptionCurveEaseIn animations:^{
         CGPoint center;
         if(closeOrOpen){
             _coverView.alpha = 1.0f;
