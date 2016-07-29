@@ -34,6 +34,14 @@
         [self.sideMenuViewController showRightSideMenu];
     }
 }
+- (IBAction)setNew:(UIButton *)sender {
+    CGFloat red = (CGFloat)random() / (CGFloat)RAND_MAX;
+    CGFloat green = (CGFloat)random() / (CGFloat)RAND_MAX;
+    CGFloat blue = (CGFloat)random() / (CGFloat)RAND_MAX;
+    CenterViewController *viewController = [[CenterViewController   alloc] init];
+    viewController.view.backgroundColor = [UIColor colorWithRed:red green:green blue:blue alpha:1.0f];
+    self.sideMenuViewController.centerViewController = viewController;
+}
 
 /*
 #pragma mark - Navigation

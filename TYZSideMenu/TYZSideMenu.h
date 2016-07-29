@@ -17,7 +17,7 @@
 @property (nonatomic, assign) CGFloat rightVisibleOffset;
 @property (nonatomic, assign) BOOL isRightShow;
 @property (nonatomic, assign) BOOL isLeftShow;
-
+@property (nonatomic, assign) BOOL showAble;
 - (TYZSideMenu *)initWithContentViewController:(UIViewController *)contentViewController leftSideViewController:(UIViewController *)leftSideViewController rightSideViewController:(UIViewController *)rightSideViewController;
 
 - (void)showLeftSideMenu;

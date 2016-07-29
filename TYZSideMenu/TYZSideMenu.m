@@ -45,11 +45,12 @@ typedef enum : NSUInteger {
 {
     self = [super init];
     if (self) {
-        self.centerViewController = contentViewController;
-        self.leftSideViewController = leftSideViewController;
-        self.rightSideViewController = rightSideViewController;
-        self.leftVisibleOffset = DefaultLeftVisibleOffset;
-        self.rightVisibleOffset = DefaultRightVisibleOffset;
+        _centerViewController = contentViewController;
+        _leftSideViewController = leftSideViewController;
+        _rightSideViewController = rightSideViewController;
+        _leftVisibleOffset = DefaultLeftVisibleOffset;
+        _rightVisibleOffset = DefaultRightVisibleOffset;
+        self.showAble = YES;
     }
     
     return self;
@@ -57,18 +58,15 @@ typedef enum : NSUInteger {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self addChildViewController:self.centerViewController];
-    if (self.leftSideViewController) {
-        [self addChildViewController:self.leftSideViewController];
+    [self configSubView];
+    if (_leftSideViewController) {
+        [self addChildViewController:_leftSideViewController];
     }
     
     if (self.rightSideViewController) {
-        [self addChildViewController:self.rightSideViewController];
+        [self addChildViewController:_rightSideViewController];
     }
-    
     [self configFrame];
-    [self configSubView];
-    
     _currentState = TYZSideMenu_NoneState;
     _currentModel = TYZSideMenu_NoneModel;
     _panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipes:)];
@@ -77,13 +75,13 @@ typedef enum : NSUInteger {
 }
 
 - (void)configFrame{
-    self.centerViewController.view.frame = self.view.frame;
-    self.leftSideViewController.view.frame = self.view.frame;
-    self.rightSideViewController.view.frame = self.view.frame;
+    _centerViewController.view.frame = self.view.frame;
+    _leftSideViewController.view.frame = self.view.frame;
+    _rightSideViewController.view.frame = self.view.frame;
     CGPoint leftInitCenter = CGPointMake(-ScreenWidth/2, ScreenHeight/2);
-    self.leftSideViewController.view.center = leftInitCenter;
+    _leftSideViewController.view.center = leftInitCenter;
     CGPoint rightInitCenter = CGPointMake(ScreenWidth+ScreenWidth/2, ScreenHeight/2);
-    self.rightSideViewController.view.center = rightInitCenter;
+    _rightSideViewController.view.center = rightInitCenter;
 }
 
 - (void)addCoverView{
@@ -111,12 +109,24 @@ typedef enum : NSUInteger {
     _currentModel = TYZSideMenu_NoneModel;
     [_visualEfView removeFromSuperview];
     [_coverView removeFromSuperview];
-    [self.leftSideViewController.view removeFromSuperview];
-    [self.rightSideViewController.view removeFromSuperview];
+    [_leftSideViewController.view removeFromSuperview];
+    [_rightSideViewController.view removeFromSuperview];
 }
 
 - (void)configSubView{
-    [self.view addSubview:self.centerViewController.view];
+    [self addChildViewController:_centerViewController];
+    [self.view addSubview:_centerViewController.view];
+}
+
+- (void)setCenterViewController:(UIViewController *)centerViewController
+{
+    [_centerViewController.view removeFromSuperview];
+    [_centerViewController removeFromParentViewController];
+    _centerViewController = nil;
+    _centerViewController = centerViewController;
+    _centerViewController.view.frame = self.view.frame;
+    [self configSubView];
+    
 }
 
 - (void)showLeftSideMenu
@@ -135,11 +145,11 @@ typedef enum : NSUInteger {
 }
 
 - (void)leftAnimate:(BOOL)closeOrOpen{
-    if (!self.leftSideViewController) {
+    if (!_leftSideViewController) {
         return;
     }
     if(![self.view viewWithTag:LEFT_TAG]){
-        [self.view addSubview:self.leftSideViewController.view];
+        [self.view addSubview:_leftSideViewController.view];
     }
     
     self.isLeftShow = closeOrOpen;
@@ -154,7 +164,7 @@ typedef enum : NSUInteger {
             center = CGPointMake(-ScreenWidth/2, ScreenHeight/2);
         }
         
-        self.leftSideViewController.view.center = center;
+        _leftSideViewController.view.center = center;
     } completion:^(BOOL finished) {
         
         if(!closeOrOpen){
@@ -165,11 +175,11 @@ typedef enum : NSUInteger {
 }
 
 - (void)rightAnimate:(BOOL)closeOrOpen{
-    if (!self.rightSideViewController) {
+    if (!_rightSideViewController) {
         return;
     }
     if(![self.view viewWithTag:RIGHT_TAG]){
-        [self.view addSubview:self.rightSideViewController.view];
+        [self.view addSubview:_rightSideViewController.view];
     }
     self.isRightShow = closeOrOpen;
     _currentModel = closeOrOpen?TYZSideMenu_RightModel:TYZSideMenu_NoneModel;
@@ -183,7 +193,7 @@ typedef enum : NSUInteger {
             center = CGPointMake((ScreenWidth+ScreenWidth/2), ScreenHeight/2);
         }
         
-        self.rightSideViewController.view.center = center;
+        _rightSideViewController.view.center = center;
     } completion:^(BOOL finished) {
         if(!closeOrOpen){
             [self removeCoverView];
@@ -203,10 +213,10 @@ typedef enum : NSUInteger {
     [UIView animateWithDuration:0.25f delay:0.0f options:UIViewAnimationOptionCurveEaseOut animations:^{
         _coverView.alpha = 0.0f;
         CGPoint rightCenter = CGPointMake((ScreenWidth+ScreenWidth/2), ScreenHeight/2);
-        self.rightSideViewController.view.center = rightCenter;
+        _rightSideViewController.view.center = rightCenter;
         
         CGPoint leftCenter = CGPointMake(-ScreenWidth/2, ScreenHeight/2);
-        self.leftSideViewController.view.center = leftCenter;
+        _leftSideViewController.view.center = leftCenter;
     } completion:^(BOOL finished) {
         [self removeCoverView];
     }];
@@ -215,31 +225,31 @@ typedef enum : NSUInteger {
 - (void)leftSideChangeWithXOffset:(CGFloat)pointX withAlphaValue:(CGFloat)alphaValue
 {
     [self addCoverView];
-    if (!self.leftSideViewController) {
+    if (!_leftSideViewController) {
         return;
     }
     if(![self.view viewWithTag:LEFT_TAG]){
-        [self.view addSubview:self.leftSideViewController.view];
+        [self.view addSubview:_leftSideViewController.view];
     }
     self.isLeftShow = YES;
     _coverView.alpha = alphaValue;
     CGPoint leftCenter = CGPointMake(pointX, ScreenHeight/2);
-    self.leftSideViewController.view.center = leftCenter;
+    _leftSideViewController.view.center = leftCenter;
 }
 
 - (void)rightSideChangeWithXOffset:(CGFloat)pointX withAlphaValue:(CGFloat)alphaValue
 {
     [self addCoverView];
-    if (!self.rightSideViewController) {
+    if (!_rightSideViewController) {
         return;
     }
     if(![self.view viewWithTag:RIGHT_TAG]){
-        [self.view addSubview:self.rightSideViewController.view];
+        [self.view addSubview:_rightSideViewController.view];
     }
     self.isRightShow = YES;
     _coverView.alpha = alphaValue;
     CGPoint rightCenter = CGPointMake(pointX, ScreenHeight/2);
-    self.rightSideViewController.view.center = rightCenter;
+    _rightSideViewController.view.center = rightCenter;
 }
 
 
@@ -247,13 +257,13 @@ typedef enum : NSUInteger {
 {
     BOOL judgeResult = NO;
     if(model == TYZSideMenu_LeftModel){
-        if (self.leftSideViewController.view.center.x > self.leftVisibleOffset-ScreenWidth/2) {
+        if (_leftSideViewController.view.center.x > _leftVisibleOffset-ScreenWidth/2) {
             judgeResult = NO;
         }else{
             judgeResult = YES;
         }
     }else if(model == TYZSideMenu_RightModel){
-        if (self.rightSideViewController.view.center.x < (ScreenWidth+ScreenWidth/2) - self.rightVisibleOffset) {
+        if (_rightSideViewController.view.center.x < (ScreenWidth+ScreenWidth/2) - self.rightVisibleOffset) {
             judgeResult = NO;
         }else{
             judgeResult = YES;
@@ -265,6 +275,9 @@ typedef enum : NSUInteger {
 
 - (void)handleSwipes:(UIPanGestureRecognizer *)sender
 {
+    if (!self.showAble) {
+        return;
+    }
     CGPoint point = [sender locationInView:self.view];
     CGFloat tempPointX = point.x;
     CGFloat tempX = tempPointX-_startPointX;
