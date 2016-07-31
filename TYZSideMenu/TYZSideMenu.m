@@ -25,8 +25,9 @@ typedef enum : NSUInteger {
 #define DefaultLeftVisibleOffset (ScreenWidth-80)
 #define DefaultRightVisibleOffset (ScreenWidth-80)
 
-#define LEFT_TAG 100
-#define RIGHT_TAG 101
+#define LEFT_TAG   100
+#define RIGHT_TAG  101
+#define CENTER_TAG 102
 @interface TYZSideMenu ()
 {
     UIView *_coverView;
@@ -120,13 +121,15 @@ typedef enum : NSUInteger {
 
 - (void)setCenterViewController:(UIViewController *)centerViewController
 {
-    [_centerViewController.view removeFromSuperview];
-    [_centerViewController removeFromParentViewController];
     _centerViewController = nil;
     _centerViewController = centerViewController;
+    [[self.view viewWithTag:CENTER_TAG] removeFromSuperview];
     _centerViewController.view.frame = self.view.frame;
-    [self configSubView];
+    centerViewController.view.tag = CENTER_TAG;
     
+    [self.view addSubview:centerViewController.view];
+    [self.view sendSubviewToBack:centerViewController.view];
+    [self.view setNeedsLayout];
 }
 
 - (void)showLeftSideMenu
